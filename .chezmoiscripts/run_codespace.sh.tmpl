@@ -1,0 +1,14 @@
+{{- if .codespaces -}}
+#!/bin/bash
+if [[ ("${GITHUB_REPOSITORY}" = "github/github") ]]; then
+  cd /workspaces/github || exit 0
+
+  # Enable /test to be indexed in solargraph
+  ruby -p -i -e "gsub(/  - test/, '#  - test')" .solargraph.yml
+  git update-index --skip-worktree .solargraph.yml
+  if [ "$(command -v code)" ]; then
+    code --install-extension castwide.solargraph --install-extension ethan-reesor.vscode-byebug 2>&1 > /dev/null
+  fi
+
+fi
+{{ end }}

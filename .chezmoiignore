@@ -1,0 +1,13 @@
+install.sh
+setup.sh
+LICENSE
+README.md
+Brewfile
+Brewfile.lock.json
+Brewfile.home
+Brewfile.home.lock.json
+Brewfile.work
+Brewfile.work.lock.json
+.vscode
+.devcontainer
+age-key.txt.age

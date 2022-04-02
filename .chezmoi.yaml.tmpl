@@ -1,0 +1,64 @@
+---
+edit:
+  command: "code"
+  args: ["--wait"]
+color: true
+
+{{/* onepassword:
+  command: "op"
+  prompt: false */}}
+{{- $name := "Jens Hilligsøe" -}}
+{{- $email := "jens@hilli.dk" -}}
+{{- $github_user := "hilli" -}}
+{{- $codespaces := env "CODESPACES" | not | not -}}
+{{- $ephemeral := false -}}
+{{- $personal := false -}}
+{{- writeToStdout "Writing chezmoi config\n" -}}
+{{/* work around unreliable hostname on darwin */}}
+{{- $hostname := .chezmoi.hostname -}}
+{{- if eq .chezmoi.os "darwin" -}}
+{{-   $hostname = output "scutil" "--get" "ComputerName" | trim -}}
+{{- end -}}
+{{/* Determine ownership from hostname */}}
+{{- if eq $hostname "miniM1" "ultra1" "maclap1" -}}
+{{- writeToStdout "Personal macOS host detected from hostname...\n" -}}
+{{-   $personal = true -}}
+{{- end }}
+
+{{- if eq .chezmoi.os "linux" }}
+{{ $computerName := output "hostname" | trim }}
+{{- if $codespaces -}}
+{{-   writeToStdout "Codespaces detected...\n" -}}
+sourceDir: {{ .chezmoi.sourceDir | quote }}
+{{-   $email = "hilli@github.com" -}}
+{{-   $personal = false -}}
+{{-   $ephemeral = true -}}
+{{- else if eq $hostname "nuc1" -}}
+{{-     writeToStdout "Personal Linux host detected from hostname...\n" -}}
+{{-     $personal = true -}}
+{{-     $ephemeral = false -}}
+{{-   end -}}
+{{- end }}
+
+{{/* {{- writeToStdout "Personal: " ($personal | quote) "\n" -}} */}}
+{{/* {{- writeToStdout "Ephemeral: " ($ephemeral | quote) "\n" -}} */}}
+
+{{- if not $ephemeral }}
+encryption: "age"
+age:
+  identity: "~/.age-key.txt"
+  recipient: "age1dzj2wu2xg927nkqwtrx2fm7hc8jv9qkyl58y9zxkcvj5pgppdp5s54343g"
+{{ end -}}
+
+data:
+  name: {{ $name }}
+  ephemeral: {{ $ephemeral }}
+  personal: {{ $personal }}
+  email: {{ $email }}
+  codespaces: {{ $codespaces }}
+  hostname: {{ $hostname }}
+  github_user: {{ $github_user }}
+
+useBuiltinAge: true
+
+{{ writeToStdout "chezmoi config done.\n" }}

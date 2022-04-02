@@ -1,0 +1,73 @@
+{{ if (eq .chezmoi.os "darwin") -}}
+#!/bin/bash
+
+set -eufo pipefail
+
+# https://github.com/mathiasbynens/dotfiles/blob/main/.macos
+
+defaults write NSGlobalDomain AppleInterfaceStyle Dark
+defaults write NSGlobalDomain AppleLanguages -array en-US da-DK
+defaults write NSGlobalDomain AppleLocale en_DK
+defaults write NSGlobalDomain InitialKeyRepeat -int 68
+defaults write NSGlobalDomain KeyRepeat -int 6
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool true
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool true
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool true
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool true
+defaults write NSGlobalDomain NSAutomaticTextCompletionEnabled -bool true
+defaults write NSGlobalDomain NSLinguisticDataAssetsRequested -array en da
+defaults write NSGlobalDomain WebAutomaticSpellingCorrectionEnabled -bool true
+
+
+defaults write com.apple.dock autohide -bool false
+defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock autohide-time-modifier -float 0
+defaults write com.apple.dock launchanim -bool false
+defaults write com.apple.dock orientation right
+defaults write com.apple.dock show-recents -bool true
+
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
+
+if [ "$(command -v dockutil)" ]; then
+  for dockItemLabel in \
+    Mail \
+    TV \
+    News \
+    Numbers \
+    Keynote \
+    Pages ; do
+    dockutil --find "$dockItemLabel" >/dev/null && dockutil --no-restart --remove "$dockItemLabel" || true
+  done
+
+  # Add apps in the order I want
+  PREVIOUS_APP=""
+  for app in \
+    Safari \
+    'Microsoft Edge' \
+    Music \
+    Messages \
+    Slack \
+    Zoom.us \
+    1Password \
+    'Visual Studio Code' \
+    iTerm \
+    kitty \
+    Obsidian \
+    Notes \
+    Reminders ; do
+    if [ -n "${PREVIOUS_APP}" ]; then
+      dockutil --no-restart --add "/Applications/${app}.app" --after "${PREVIOUS_APP}" --replacing "$app"
+    else
+      dockutil --no-restart --add "/Applications/${app}.app" --replacing "$app"
+    fi
+    PREVIOUS_APP="${app}"
+  done
+
+  # Spark is a bit odd placed
+  dockutil --add /Applications/Spark.localized/Spark.app --after "Slack" --replacing "Spark"
+fi
+
+{{/* Using Spark to do a dockutil without the --no-restart instead of a otherwise needed `killall Dock` */}}
+{{- end -}}

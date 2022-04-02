@@ -1,0 +1,9 @@
+*~
+*.pyc
+.DS_Store
+.idea
+.direnv
+.envrc
+.svn
+.terraform
+/tmp

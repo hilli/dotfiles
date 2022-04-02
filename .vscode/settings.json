@@ -1,0 +1,12 @@
+{
+  "files.associations": {
+    "*.tmpl": "gotemplate",
+    "*.yaml.tmpl": "goyaml",
+    "/*.sh": "shellscript",
+    "/*.zsh": "shellscript",
+    "/*.bash": "shellscript",
+    "/dot_zshrc": "shellscript",
+    "/dot_gitconfig.tmpl": "gitconfig",
+    "/Aptfile": "plaintext"
+  }
+}

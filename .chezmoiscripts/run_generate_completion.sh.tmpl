@@ -1,0 +1,14 @@
+{{- if or (eq .chezmoi.os "darwin") (eq .chezmoi.os "linux") -}}
+#!/bin/bash
+
+mkdir -p "${HOME}/.local/share/site-functions"
+{{ if eq .chezmoi.os "darwin" }}
+# Set macOS defaults
+echo Generating zsh completions for macOS
+# op completion zsh >"${HOME}.local/share/site-functions/op.zsh"
+{{ else if eq .chezmoi.os "linux" }}
+# Set Linux defaults
+echo Generating zsh completions for Linux
+gh completion -s zsh >"${HOME}/.local/share/site-functions/gh.zsh"
+{{ end }}
+{{ end }}

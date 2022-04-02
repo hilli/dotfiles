@@ -1,0 +1,94 @@
+[user]
+	name = {{ .name }}
+	email = {{ .email }}
+	signingkey = CE1CF90A
+	# signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKEcl1fnXIV3u0Q8E1rT6FsalcEGV+pLi44gqthZEq4e
+	# signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEuksrREX5mn9I9iWLlKOUVIdM7Ae3XK5Mv4kKL6AGeW
+[core]
+	autocrlf = false
+	safecrlf = true
+	excludesfile = /Users/hilli/.gitignore_global
+	editor = code -w
+
+[alias]
+	co = checkout
+ 	ci = commit
+ 	st = status
+ 	br = branch
+ 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	#lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+ 	type = cat-file -t
+ 	dump = cat-file -p
+ 	staged = diff --staged
+ 	unstage = reset HEAD --
+ 	last = log -1 HEAD
+	pushall = push --recurse-submodules=on-demand
+	squash = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
+	# https://golang.org/doc/contribute.html
+	change = codereview change
+	gofmt = codereview gofmt
+	mail = codereview mail
+	pending = codereview pending
+	submit = codereview submit
+	sync = codereview sync
+
+[color]
+	ui = true
+	log = auto
+	branch = auto
+	diff = auto
+	status = auto
+
+[merge]
+	keepBackup = false;
+
+[push]
+	current = default
+	default = current
+
+[github]
+	user = hilli
+
+[credential]
+	helper = osxkeychain
+	helper = /usr/local/share/gcm-core/git-credential-manager-core
+
+[branch]
+	autosetuprebase = always
+[commit]
+	gpgsign = false
+	#gpgsign = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[gpg]
+	format = x509
+	#format = ssh
+[gpg "ssh"]
+	allowedSignersFile = /Users/hilli/.ssh/allowed_signers
+[init]
+	defaultBranch = main
+[rebase]
+	autosquash = true
+	autostash = true
+[remote "origin"]
+	prune = true
+[receive]
+	fsckobjects = true
+[pull]
+	default = current
+	rebase = false
+[push]
+	default = current
+[credential "https://dev.azure.com"]
+	useHttpPath = true
+[diff "ansible-vault"]
+	textconv = ansible-vault view
+	cachetextconv = false
+[transfer]
+	fsckobjects = true
+
+# vim: set filetype=gitconfig:

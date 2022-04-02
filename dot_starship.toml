@@ -1,0 +1,46 @@
+# https://starship.rs/config/
+[aws]
+disabled = true
+#symbol = "☁️\ue7ad "
+[gcloud]
+disabled = true
+
+
+[directory]
+truncation_length = 8
+
+[directory.substitutions]
+# Glyph hex codes via https://www.nerdfonts.com/cheat-sheet
+#"test-cloud" = "\ufa92"
+#"github" = "\uf408"
+#"slack" = "\uf198"
+#"git" = "\uf1d3"
+#"npm" = "\ue71e"
+
+#[[battery.display]]
+#threshold = 10
+#style = "bold red"
+
+[memory_usage]
+disabled = false
+# show_percentage = true
+# show_swap = true
+threshold = -1
+# separator = "/"
+style = "bold dimmed green"
+
+[java]
+disabled = true
+
+[golang]
+
+[nodejs]
+symbol = "🤖 "
+
+[time]
+disabled = false
+format = "🕙[\\[ $time \\]]($style)"
+time_format = "%T %Y-%m-%d"
+utc_time_offset = "+1"
+style = "white"
+time_range = "08:00:00-17:00:00"

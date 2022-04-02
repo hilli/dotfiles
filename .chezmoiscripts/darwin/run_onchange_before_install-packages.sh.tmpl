@@ -1,0 +1,44 @@
+{{- if (eq .chezmoi.os "darwin") -}}
+#!/bin/bash
+set -eufo pipefail
+
+script_dir="{{ .chezmoi.sourceDir }}"
+
+function banner {
+  if [ "${TERM}" = "dumb" ]; then
+    echo ""
+    echo "######## $1 ########"
+    echo ""
+  else
+    echo ""
+    echo "$(tput setaf 5)######## $1 ########$(tput sgr0)"
+    echo ""
+  fi
+}
+
+banner "macOS package install"
+
+# Install Homebrew
+if [ ! "$(command -v brew)" ]; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+# Install packages needed
+if [ ! "$(command -v mas)" ]; then
+  brew install mas -
+fi
+cd "${script_dir}" || exit
+
+# Brewfile hashes (To rerun this script when Brewfile changes):
+# Brewfile:      {{ include "Brewfile" | sha256sum }}
+# Brewfile.home: {{ include "Brewfile.home" | sha256sum }}
+# Brewfile.work: {{ include "Brewfile.work" | sha256sum }}
+
+brew bundle --no-lock --file Brewfile
+{{- if eq .personal true }}
+brew bundle --no-lock --file Brewfile.home
+{{- end }}
+{{- if eq .personal false }}
+brew bundle --no-lock --file Brewfile.work
+{{- end }}
+
+{{- end -}}

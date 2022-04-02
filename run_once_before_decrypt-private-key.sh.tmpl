@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ "$(command -v age)" || "$(command -v ${HOME}.local/bin/age)" ]]; then
+    if [ ! -f "${HOME}/.age-key.txt" ]; then
+        echo Decrypting age key - We will need the decrypt password:
+        age --decrypt --output "${HOME}/.age-key.txt" "{{ .chezmoi.sourceDir }}/age-key.txt.age"
+        chmod 600 "${HOME}/.age-key.txt"
+    fi
+else
+    echo "age not installed, skipping decryption"
+fi

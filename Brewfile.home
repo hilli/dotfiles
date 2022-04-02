@@ -9,11 +9,11 @@ cask "hilli/hilli/native-access"
 cask "logitech-options"
 cask "robo-3t"
 cask "sonos"
+
 mas "Apple Configurator", id: 1037126344
 mas "Auth for Tesla", id: 1552058613
 mas "Bluetooth Inspector", id: 1509085044
-# mas "djay Pro", id: 1302002064
-mas "djay Pro AI", id: 450527929
+# mas "djay Pro AI", id: 450527929 # This package install isn't idempotent for some reason - Install manually
 mas "Final Cut Pro", id: 424389933
 mas "Gifski", id: 1351639930
 mas "Home Inventory 4", id: 1124615151

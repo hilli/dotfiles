@@ -29,13 +29,18 @@ fi
 cd "${script_dir}" || exit
 
 # Brewfile hashes (To rerun this script when Brewfile changes):
-# Brewfile:      {{ include "Brewfile" | sha256sum }}
-# Brewfile.home: {{ include "Brewfile.home" | sha256sum }}
-# Brewfile.work: {{ include "Brewfile.work" | sha256sum }}
+# Brewfile:             {{ include "Brewfile" | sha256sum }}
+# Brewfile.home:        {{ include "Brewfile.home" | sha256sum }}
+# Brewfile.arm64.home:  {{ include "Brewfile.arm64.home" | sha256sum }}
+# Brewfile.work:        {{ include "Brewfile.work" | sha256sum }}
 
 brew bundle --no-lock --file Brewfile
 {{- if eq .personal true }}
 brew bundle --no-lock --file Brewfile.home
+{{ if eq .chezmoi.arch "arm64" }}
+# brew bundle --no-lock --file Brewfile.arm64.home
+# Awaiting mas fixing this before iPad apps can get installed: https://github.com/mas-cli/mas/issues/321
+{{ end }}
 {{- end }}
 {{- if eq .personal false }}
 brew bundle --no-lock --file Brewfile.work

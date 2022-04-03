@@ -2,9 +2,11 @@ install.sh
 setup.sh
 LICENSE
 README.md
+Aptfile
 Brewfile
 Brewfile.lock.json
 Brewfile.home
+Brewfile.arm64.home
 Brewfile.home.lock.json
 Brewfile.work
 Brewfile.work.lock.json

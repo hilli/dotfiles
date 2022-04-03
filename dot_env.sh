@@ -139,6 +139,9 @@ if [ "$(command -v brew)" ]; then
 	fi
 fi
 
+# chezmoi generated command completions
+export FPATH=${FPATH}:${HOME}/.local/share/site-functions
+
 # Set timestamps in .bash_history
 export HISTTIMEFORMAT="%F %T "
 export PATH=$PATH:/usr/local/bin:~/bin:/opt/local/bin:/opt/local/sbin

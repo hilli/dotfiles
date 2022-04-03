@@ -1,4 +1,4 @@
-{{ if (eq .chezmoi.os "darwin") -}}
+{{- if (eq .chezmoi.os "darwin") -}}
 #!/bin/bash
 
 set -eufo pipefail
@@ -18,7 +18,6 @@ defaults write NSGlobalDomain NSAutomaticTextCompletionEnabled -bool true
 defaults write NSGlobalDomain NSLinguisticDataAssetsRequested -array en da
 defaults write NSGlobalDomain WebAutomaticSpellingCorrectionEnabled -bool true
 
-
 defaults write com.apple.dock autohide -bool false
 defaults write com.apple.dock autohide-delay -float 0
 defaults write com.apple.dock autohide-time-modifier -float 0
@@ -31,44 +30,46 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
 
 if [ "$(command -v dockutil)" ]; then
-  for dockItemLabel in \
-    Mail \
-    TV \
-    News \
-    Numbers \
-    Keynote \
-    Pages ; do
+  while read -r dockItemLabel; do
     dockutil --find "$dockItemLabel" >/dev/null && dockutil --no-restart --remove "$dockItemLabel" || true
-  done
+  done <<DOCKAPPSTOREMOVE
+    Mail
+    TV
+    News
+    Numbers
+    Keynote
+    Pages
+DOCKAPPSTOREMOVE
 
   # Add apps in the order I want
   PREVIOUS_APP=""
-  for app in \
-    Safari \
-    'Microsoft Edge' \
-    Music \
-    Sonos \
-    Messages \
-    Slack \
-    Zoom.us \
-    1Password \
-    'Visual Studio Code' \
-    iTerm \
-    kitty \
-    Obsidian \
-    Notes \
-    Reminders ; do
+  while read -r app; do
     if [ -n "${PREVIOUS_APP}" ]; then
       dockutil --no-restart --add "/Applications/${app}.app" --after "${PREVIOUS_APP}" --replacing "$app"
     else
       dockutil --no-restart --add "/Applications/${app}.app" --replacing "$app"
     fi
     PREVIOUS_APP="${app}"
-  done
+  done <<DOCKAPPS
+    Safari
+    Microsoft Edge
+    Music
+    Sonos
+    Messages
+    Slack
+    Zoom.us
+    1Password
+    Visual Studio Code
+    iTerm
+    kitty
+    Obsidian
+    Notes
+    Reminders
+DOCKAPPS
 
   # Spark is a bit odd placed
   dockutil --add /Applications/Spark.localized/Spark.app --after "Slack" --replacing "Spark"
 fi
 
-{{/* Using Spark to do a dockutil without the --no-restart instead of a otherwise needed `killall Dock` */}}
-{{- end -}}
+#{{/* Using Spark to do a dockutil without the --no-restart instead of a otherwise needed `killall Dock` */}}
+#{{- end -}}

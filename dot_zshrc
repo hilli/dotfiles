@@ -118,6 +118,7 @@ source ~/.aliases.sh
 source ~/.config.sh
 source ~/.codespaces.sh
 
+autoload -Uz compinit
 compinit
 
 #$(git_super_status)

@@ -1,0 +1,7 @@
+{{/* Use GitHub user keys to populate ~/.ssh/allowed_signers with my ed25519 keys only */}}
+# Managed with chezmoi
+{{- range gitHubKeys .github_user -}}
+{{- if regexMatch "^ssh-ed25519" .Key -}}
+* {{ .Key -}}
+{{ end }}
+{{ end -}}

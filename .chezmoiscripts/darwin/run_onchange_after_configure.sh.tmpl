@@ -39,6 +39,7 @@ if [ "$(command -v dockutil)" ]; then
     Numbers
     Keynote
     Pages
+    Siri
 DOCKAPPSTOREMOVE
 
   # Add apps in the order I want
@@ -56,6 +57,9 @@ DOCKAPPSTOREMOVE
     Music
     Sonos
     Messages
+    Find My
+    Activity Monitor
+    Photos
     Slack
     Zoom.us
     1Password
@@ -67,8 +71,12 @@ DOCKAPPSTOREMOVE
     Reminders
 DOCKAPPS
 
-  # Spark is a bit odd placed
-  dockutil --add /Applications/Spark.localized/Spark.app --after "Slack" --replacing "Spark"
+  # Spark is *maybe*  a bit odd placed
+  if [ -d "/Applications/Spark.app" ]; then
+    dockutil --no-restart --add "/Applications/Spark.app" --after "1Password" --replacing "Spark"
+  else
+    dockutil --add /Applications/Spark.localized/Spark.app --after "Slack" --replacing "Spark"
+  fi
 fi
 
 #{{/* Using Spark to do a dockutil without the --no-restart instead of a otherwise needed `killall Dock` */}}

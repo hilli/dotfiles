@@ -173,8 +173,12 @@ fi
 # export HOMEBREW_GITHUB_API_TOKEN="$(skate get HOMEBREW_GITHUB_API_TOKEN)"
 
 # rbenv
-[[ -d $HOME/.rbenv ]] && eval "$(rbenv init -)"
-export PATH=${HOME}/.rbenv/shims:${PATH}
+if [ -d $HOME/.rbenv ]; then
+	export PATH="${HOME}/.rbenv/shims:${PATH}"
+fi
+if [ "$(command -v rbenv)" ]; then
+	eval "$(rbenv init -)"
+fi
 
 # iTerm2
 [[ ${TERM_PROGRAM} == "iTerm.app" ]] && source "${HOME}/.iterm2_shell_integration.zsh" || true

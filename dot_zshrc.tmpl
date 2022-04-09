@@ -116,7 +116,7 @@ alias zshconfig="chezmoi edit ~/.zshrc"
 source ~/.env.sh
 source ~/.aliases.sh
 source ~/.config.sh
-{{ if eq .codespaces true -}}
+{{ if .codespaces -}}
 source ~/.codespaces.sh
 {{- end }}
 

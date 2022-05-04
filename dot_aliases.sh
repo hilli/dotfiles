@@ -173,3 +173,5 @@ function cscode() {
   csname="$(gh cs create $@)"
   gh cs code -c $csname
 }
+
+alias listening_on_my_mac="netstat -an -ptcp | grep LISTEN"

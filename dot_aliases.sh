@@ -102,9 +102,9 @@ function dkwhois() {
 # Docker
 # http://kartar.net/2014/03/some-useful-docker-bash-functions-and-aliases/
 # Remove all stopped containvers
-drm() { docker rm $(docker ps -q -a); }
+alias drm="docker rm $(docker ps -q -a)"
 # Remove all non-used images
-dri() { docker rmi $(docker images -q); }
+alias dri="docker rmi $(docker images -q)"
 # Run image in interactive container
 alias dki="docker run -t -i -P"
 function dcontext() {

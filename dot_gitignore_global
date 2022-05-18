@@ -6,4 +6,5 @@
 .envrc
 .svn
 .terraform
+.obsidian
 /tmp

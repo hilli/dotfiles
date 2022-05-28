@@ -175,3 +175,11 @@ function cscode() {
 }
 
 alias listening_on_my_mac="netstat -an -ptcp | grep LISTEN"
+
+function nibbles() {
+  if [ ! -f "${GOPATH}/bin/nibbles" ]; then
+    go install github.com/gophun/nibbles@latest
+  else
+    $GOPATH/bin/nibbles
+  fi
+}

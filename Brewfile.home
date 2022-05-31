@@ -11,6 +11,7 @@ cask "robo-3t"
 cask "sonos"
 cask "utm"
 
+mas "Affinity Photo", id: 824183456 # https://affinity.serif.com/en-us/photo/
 mas "Apple Configurator", id: 1037126344
 mas "Auth for Tesla", id: 1552058613
 mas "Bluetooth Inspector", id: 1509085044

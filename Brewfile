@@ -12,6 +12,7 @@ tap "nodenv/nodenv"
 tap "ouchxp/nodenv"
 tap "warrensbox/tap"
 
+brew "act"
 brew "age"
 brew "readline"
 brew "xz"

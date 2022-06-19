@@ -4,6 +4,7 @@
 	signingkey = CE1CF90A
 	# signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKEcl1fnXIV3u0Q8E1rT6FsalcEGV+pLi44gqthZEq4e
 	# signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEuksrREX5mn9I9iWLlKOUVIdM7Ae3XK5Mv4kKL6AGeW
+
 [core]
 	autocrlf = false
 	safecrlf = true
@@ -51,7 +52,9 @@
 	user = hilli
 
 [credential]
+{{ if (eq .chezmoi.os "darwin") }}
 	helper = osxkeychain
+{{- end }}
 
 [branch]
 	autosetuprebase = always

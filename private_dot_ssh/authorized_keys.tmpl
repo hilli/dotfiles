@@ -1,6 +1,4 @@
-{{/* Use GitHub user keys to populate ~/.ssh/authorized_keys (Except in codespaces where it is already done) */}}
-{{- if not .codespaces -}}
+{{/* Use GitHub user keys to populate ~/.ssh/authorized_keys */}}
 {{- range gitHubKeys .github_user -}}
 {{- .Key }}
-{{ end }}
 {{ end }}

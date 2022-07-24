@@ -2,6 +2,7 @@
   "files.associations": {
     "*.tmpl": "gotemplate",
     "*.yaml.tmpl": "goyaml",
+    "*.yaml": "goyaml",
     "/*.sh": "shellscript",
     "/*.zsh": "shellscript",
     "/*.bash": "shellscript",

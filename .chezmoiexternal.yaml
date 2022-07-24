@@ -3,14 +3,15 @@
   type: archive
   url: https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz
   extract: true
+  stripComponents: 1
   refreshPeriod: 168h
-.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+.oh-my-zsh/custom/plugins/zsh-syntax-highlighting:
   type: archive
   url: "https://github.com/zsh-users/zsh-syntax-highlighting/archive/master.tar.gz"
   exact: true
   stripComponents: 1
   refreshPeriod: "168h"
-.oh-my-zsh/custom/plugins/zsh-autosuggestions
+.oh-my-zsh/custom/plugins/zsh-autosuggestions:
   type: archive
   url: "https://github.com/zsh-users/zsh-autosuggestions/archive/refs/tags/v0.7.0.tar.gz"
   exact: true

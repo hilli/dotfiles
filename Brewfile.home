@@ -6,7 +6,7 @@ brew "rclone"
 
 cask "balenaetcher"
 cask "hilli/hilli/native-access"
-cask "logitech-options"
+# cask "logitech-options" # Messes with scroll un Universal Control on other devices
 cask "robo-3t"
 cask "sonos"
 cask "utm"

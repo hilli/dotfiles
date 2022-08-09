@@ -46,9 +46,9 @@ DOCKAPPSTOREMOVE
   PREVIOUS_APP=""
   while read -r app; do
     if [ -n "${PREVIOUS_APP}" ]; then
-      dockutil --no-restart --add "/Applications/${app}.app" --after "${PREVIOUS_APP}" --replacing "$app"
+      dockutil --no-restart --add "/Applications/${app}.app" --after "/Applications/${PREVIOUS_APP}" --replacing "$app" || true
     else
-      dockutil --no-restart --add "/Applications/${app}.app" --replacing "$app"
+      dockutil --no-restart --add "/Applications/${app}.app" --replacing "$app" || true
     fi
     PREVIOUS_APP="${app}"
   done <<DOCKAPPS
@@ -57,8 +57,8 @@ DOCKAPPSTOREMOVE
     Music
     Sonos
     Messages
-    Find My
-    Activity Monitor
+    FindMy
+    Utilities/Activity Monitor
     Photos
     Slack
     Zoom.us
@@ -74,7 +74,7 @@ DOCKAPPS
 
   # Spark is *maybe*  a bit odd placed
   if [ -d "/Applications/Spark.app" ]; then
-    dockutil --no-restart --add "/Applications/Spark.app" --after "1Password" --replacing "Spark"
+    dockutil --add "/Applications/Spark.app" --after "1Password" --replacing "Spark"
   else
     dockutil --add /Applications/Spark.localized/Spark.app --after "Slack" --replacing "Spark"
   fi

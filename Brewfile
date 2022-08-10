@@ -109,7 +109,7 @@ cask "1password-cli"
 cask "alfred"
 cask "arq"
 cask "dash"
-cask "datadog-agent"
+cask "datadog-agent", greedy: true
 cask "discord"
 cask "docker"
 cask "font-fira-code-nerd-font"

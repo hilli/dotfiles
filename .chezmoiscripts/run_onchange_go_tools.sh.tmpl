@@ -1,3 +1,4 @@
+{{- if eq .codespaces false -}}
 #!/bin/bash
 if [ "$(command -v go)" ]; then
   echo Installing go tools
@@ -7,3 +8,4 @@ if [ "$(command -v go)" ]; then
   go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
   go install github.com/bufbuild/connect-go/cmd/protoc-gen-connect-go@latest
 fi
+{{ end }}

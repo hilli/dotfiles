@@ -1,2 +1,2 @@
 # Apple Silicon only:
-mas "Yahoo Finance", id: 328412701
+mas 'Yahoo Finance', id: 328412701

@@ -1,6 +1,6 @@
-brew "libusbmuxd"
-brew "ideviceinstaller"
-brew "nomad"
-brew "packer"
-brew "pre-commit"
-mas "Okta Extension App", id: 1439967473
+brew 'libusbmuxd'
+brew 'ideviceinstaller'
+brew 'nomad'
+brew 'packer'
+brew 'pre-commit'
+mas 'Okta Extension App', id: 1439967473

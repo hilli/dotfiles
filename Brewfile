@@ -113,6 +113,7 @@ cask "dash"
 cask "datadog-agent", greedy: true
 cask "discord"
 cask "docker"
+cask "font-comic-mono"
 cask "font-fira-code-nerd-font"
 cask "font-inconsolata-nerd-font"
 cask "font-overpass-nerd-font"

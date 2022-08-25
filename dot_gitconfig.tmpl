@@ -1,9 +1,8 @@
 [user]
 	name = {{ .name }}
 	email = {{ .email }}
-	signingkey = CE1CF90A
-	# signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKEcl1fnXIV3u0Q8E1rT6FsalcEGV+pLi44gqthZEq4e
-	# signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEuksrREX5mn9I9iWLlKOUVIdM7Ae3XK5Mv4kKL6AGeW
+	#signingkey = CE1CF90A
+	signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKEcl1fnXIV3u0Q8E1rT6FsalcEGV+pLi44gqthZEq4e hilli@github.com"
 
 [core]
 	autocrlf = false
@@ -52,7 +51,7 @@
 	user = hilli
 
 [credential]
-{{ if (eq .chezmoi.os "darwin") }}
+{{ if (eq .chezmoi.os "darwin") -}}
 	helper = osxkeychain
 {{- end }}
 
@@ -67,10 +66,12 @@
 	process = git-lfs filter-process
 	required = true
 [gpg]
-	format = x509
-	#format = ssh
+	format = ssh
+	#format = x509 # GPG
 [gpg "ssh"]
 	allowedSignersFile = ~/.ssh/allowed_signers
+[tag]
+	gpgsign = true
 [init]
 	defaultBranch = main
 [rebase]

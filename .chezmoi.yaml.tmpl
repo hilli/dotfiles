@@ -13,6 +13,7 @@ color: true
 {{- $codespaces := env "CODESPACES" | not | not -}}
 {{- $ephemeral := false -}}
 {{- $personal := false -}}
+{{- $desktop := false -}}
 {{- writeToStdout "Writing chezmoi config\n" -}}
 {{/* work around unreliable hostname on darwin */}}
 {{- $hostname := .chezmoi.hostname -}}
@@ -20,7 +21,7 @@ color: true
 {{-   $hostname = output "scutil" "--get" "ComputerName" | trim -}}
 {{- end -}}
 {{/* Determine ownership from hostname */}}
-{{- if eq $hostname "miniM1" "ultra1" "maclap1" -}}
+{{- if eq $hostname "ultra1" "maclap1" -}}
 {{- writeToStdout "Personal macOS host detected from hostname...\n" -}}
 {{-   $personal = true -}}
 {{- end }}
@@ -33,15 +34,17 @@ sourceDir: {{ .chezmoi.sourceDir | quote }}
 {{-   $email = "hilli@github.com" -}}
 {{-   $personal = false -}}
 {{-   $ephemeral = true -}}
-{{- else if eq $hostname "nuc1" -}}
-{{-     writeToStdout "Personal Linux host detected from hostname...\n" -}}
+{{- else if eq $hostname "nuc1" "minim1" -}}
+{{-     writeToStdout "Personal Linux/Mac host (non-desktop function) detected from hostname...\n" -}}
 {{-     $personal = true -}}
 {{-     $ephemeral = false -}}
+{{-     $desktop = false -}}
 {{-   end -}}
 {{- end }}
 
 {{/* {{- writeToStdout "Personal: " ($personal | quote) "\n" -}} */}}
 {{/* {{- writeToStdout "Ephemeral: " ($ephemeral | quote) "\n" -}} */}}
+{{/* {{- writeToStdout "Desktop: " ($desktop | quote) "\n" -}} */}}
 
 {{- if not $ephemeral }}
 encryption: "age"
@@ -53,6 +56,7 @@ age:
 data:
   name: {{ $name }}
   ephemeral: {{ $ephemeral }}
+  desktop: {{ $desktop }}
   personal: {{ $personal }}
   email: {{ $email }}
   codespaces: {{ $codespaces }}

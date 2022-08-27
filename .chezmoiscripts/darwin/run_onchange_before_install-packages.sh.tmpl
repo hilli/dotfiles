@@ -20,8 +20,16 @@ banner "macOS package install"
 
 # Install Homebrew
 if [ ! "$(command -v brew)" ]; then
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  if [[ ! -f "/usr/local/bin/brew" || ! -f "/opt/homebrew/bin/brew" ]]; then
+    # Homebrew already installed - But path is screwed up
+    export PATH="/usr/local/bin:/opt/homebrew/bin:$PATH"
+  else
+    echo "Installing Homebrew"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    export PATH="/usr/local/bin:/opt/homebrew/bin:$PATH"
+  fi
 fi
+
 # Install packages needed
 if [ ! "$(command -v mas)" ]; then
   brew install mas

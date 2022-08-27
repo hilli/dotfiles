@@ -138,29 +138,3 @@ cask 'viscosity'
 cask 'visual-studio-code'
 cask 'yubico-yubikey-manager'
 cask 'zoom'
-
-mas '1Password for Safari', id: 1569813296
-mas 'AdBlock', id: 1402042596
-mas 'CloudMounter', id: 1130254674
-mas 'Developer', id: 640199958
-mas 'Discovery', id: 1381004916
-mas 'Disk Speed Test', id: 425264550
-mas 'Home Assistant', id: 1099568401
-mas 'Magnet', id: 441258766
-mas 'Microsoft Excel', id: 462058435
-mas 'Microsoft OneNote', id: 784801555
-mas 'Microsoft Outlook', id: 985367838
-mas 'Microsoft PowerPoint', id: 462062816
-mas 'Microsoft Remote Desktop', id: 1295203466
-mas 'Microsoft To Do', id: 1274495053
-mas 'Microsoft Word', id: 462054704
-mas 'Monity', id: 915542151
-mas 'OneDrive', id: 823766827
-mas 'Parcel', id: 639968404
-mas 'Slack', id: 803453959
-mas 'Spark', id: 1176895641
-mas 'Speedtest', id: 1153157709
-mas 'Tailscale', id: 1475387142
-mas 'ToothFairy', id: 1191449274
-mas 'WiFi Explorer', id: 494803304
-mas 'Xcode', id: 497799835

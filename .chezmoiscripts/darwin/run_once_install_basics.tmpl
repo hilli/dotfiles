@@ -1,0 +1,5 @@
+#!/bin/bash
+xcode-select --install || true
+if [ "$(uname -m)" == "arm64" ]; then
+  sudo softwareupdate --install-rosetta --agree-to-license
+fi

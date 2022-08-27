@@ -1,0 +1,6 @@
+#!/bin/bash
+xcode-select --install || true
+/opt/homebrew/bin/mas install 497799835 || true # Xcode
+if [ "$(uname -m)" == "arm64" ]; then
+  sudo softwareupdate --install-rosetta --agree-to-license
+fi

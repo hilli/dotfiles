@@ -4,11 +4,14 @@ LICENSE
 README.md
 Aptfile
 Brewfile
+Brewfile-mas
 Brewfile.lock.json
 Brewfile.home
+Brewfile-mas.home
 Brewfile.arm64.home
 Brewfile.home.lock.json
 Brewfile.work
+Brewfile-mas.work
 Brewfile.work.lock.json
 .vscode
 .devcontainer

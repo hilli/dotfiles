@@ -1,5 +1,7 @@
 #!/bin/bash
 
+PATH=${PATH}:/usr/local/bin:/opt/homebrew/bin/
+
 if [[ "$(command -v age)" || "$(command -v ${HOME}.local/bin/age)" ]]; then
     if [ ! -f "${HOME}/.age-key.txt" ]; then
         echo Decrypting age key - We will need the decrypt password:

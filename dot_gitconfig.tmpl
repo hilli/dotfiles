@@ -51,15 +51,14 @@
 	user = hilli
 
 [credential]
-{{ if (eq .chezmoi.os "darwin") -}}
+{{- if (eq .chezmoi.os "darwin") }}
 	helper = osxkeychain
 {{- end }}
 
 [branch]
 	autosetuprebase = always
 [commit]
-	gpgsign = false
-	#gpgsign = true
+	gpgsign = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

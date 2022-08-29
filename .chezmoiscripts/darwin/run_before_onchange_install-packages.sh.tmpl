@@ -31,9 +31,16 @@ if [ ! "$(command -v brew)" ]; then
 fi
 
 # Install packages needed
+export PATH="/usr/local/bin:/opt/homebrew/bin:$PATH"
 if [ ! "$(command -v mas)" ]; then
   brew install mas
 fi
+mas install 497799835 || true # Xcode
+sudo xcodebuild -license accept || true
+if [ "$(uname -m)" == "arm64" ]; then
+  sudo softwareupdate --install-rosetta --agree-to-license
+fi
+
 cd "${script_dir}" || exit
 
 # Brewfile hashes (To rerun this script when Brewfile changes):

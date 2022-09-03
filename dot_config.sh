@@ -48,4 +48,6 @@ elif [ "$SHELL" = "/bin/zsh" ]; then
 	CYAN='%F{cyan}'
 	BLUE='%F{blue}'
 	BLACK='%F{black}'
+	bindkey "^[^[[C" forward-word
+	bindkey "^[^[[D" backward-word
 fi

@@ -108,7 +108,7 @@ brew 'warrensbox/tap/tfswitch'
 
 cask '1password'
 cask '1password-cli'
-cask 'alfred'
+# cask 'alfred'
 cask 'arq'
 cask 'dash'
 cask 'datadog-agent', greedy: true

@@ -183,3 +183,6 @@ function nibbles() {
     $GOPATH/bin/nibbles
   fi
 }
+
+# Useful for accessing keychain when working remotely
+alias keychain_login="security -v unlock-keychain ~/Library/Keychains/login.keychain-db"

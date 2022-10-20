@@ -87,6 +87,11 @@ if [ "$(uname)" = "Darwin" ]; then
 		eval "$(swiftenv init -)"
 	fi
 
+	# dapr
+	if [ "$(command -v dapr)" ]; then
+		PATH=$PATH:/Users/hilli/.dapr/bin
+	fi
+
 	# Shut up Catalina bash warning
 	export BASH_SILENCE_DEPRECATION_WARNING=1
 

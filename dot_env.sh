@@ -89,7 +89,7 @@ if [ "$(uname)" = "Darwin" ]; then
 
 	# dapr
 	if [ "$(command -v dapr)" ]; then
-		PATH=$PATH:/Users/hilli/.dapr/bin
+		PATH=$PATH:$HOME/.dapr/bin
 	fi
 
 	# Shut up Catalina bash warning

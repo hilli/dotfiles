@@ -31,7 +31,7 @@ PACKAGES=""
 for i in $(cat {{ .chezmoi.sourceDir }}/Aptfile); do
   PACKAGES="${PACKAGES} ${i}"
 done
-sudo apt-get -y install ${PACKAGES}
+DEBIAN_FRONTEND=noninteractive sudo apt-get -y install ${PACKAGES}
 
 banner "starship"
 curl -fsSL https://starship.rs/install.sh -o install_starship.sh

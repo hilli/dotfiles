@@ -33,7 +33,7 @@ if [ "$(command -v apt)" ]; then
   for i in $(cat {{ .chezmoi.sourceDir }}/Aptfile); do
     PACKAGES="${PACKAGES} ${i}"
   done
-  sudo apt-get -y install ${PACKAGES}
+  DEBIAN_FRONTEND=noninteractive sudo apt-get -y install ${PACKAGES}
 elif [ "$(command -v pacman)" ]; then
   # Arch; See more about pacman here: https://wiki.archlinux.org/title/pacman
   info "pacman is running the show"

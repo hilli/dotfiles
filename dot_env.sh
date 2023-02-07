@@ -233,3 +233,6 @@ fi
 # StarShip prompt
 export STARSHIP_CONFIG=~/.starship.toml
 eval "$(starship init zsh)"
+
+# 1Password	CLI
+export OP_BIOMETRIC_UNLOCK_ENABLED=true

@@ -186,3 +186,6 @@ function nibbles() {
 
 # Useful for accessing keychain when working remotely
 alias keychain_login="security -v unlock-keychain ~/Library/Keychains/login.keychain-db"
+
+# 1Password CLI
+alias oplogin="eval \$(op signin --account my)"

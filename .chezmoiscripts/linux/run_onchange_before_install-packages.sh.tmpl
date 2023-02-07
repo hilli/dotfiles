@@ -25,13 +25,26 @@ function info {
 
 banner "Linux stuff"
 
-banner "apt"
-sudo apt update -y
-PACKAGES=""
-for i in $(cat {{ .chezmoi.sourceDir }}/Aptfile); do
-  PACKAGES="${PACKAGES} ${i}"
-done
-sudo apt-get -y install ${PACKAGES}
+if [ "$(command -v apt)" ]; then
+  info "apt is already installed"
+  banner "apt"
+  sudo apt update -y
+  PACKAGES=""
+  for i in $(cat {{ .chezmoi.sourceDir }}/Aptfile); do
+    PACKAGES="${PACKAGES} ${i}"
+  done
+  sudo apt-get -y install ${PACKAGES}
+elif [ "$(command -v pacman)" ]; then
+  # Arch; See more about pacman here: https://wiki.archlinux.org/title/pacman
+  info "pacman is running the show"
+  banner "pacman"
+  sudo pacman -Suy
+  PACKAGES=""
+  for i in $(cat {{ .chezmoi.sourceDir }}/Pacmanfile); do
+    PACKAGES="${PACKAGES} ${i}"
+  done
+  sudo pacman -Suy --noconfirm ${PACKAGES}
+fi
 
 banner "starship"
 curl -fsSL https://starship.rs/install.sh -o install_starship.sh
@@ -46,12 +59,16 @@ else
   info "installing gh..."
   url="https://api.github.com/repos/cli/cli/releases/latest"
   version=$(curl -sSL "${url}" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/' | cut -c2-)
+  ARCH=$(uname -m)
+  if [ "${ARCH}" = "aarch64" ]; then
+    ARCH="arm64"
+  fi
   info "will install gh version ${version}"
-  url="https://github.com/cli/cli/releases/download/v${version}/gh_${version}_linux_amd64.tar.gz"
-  curl -sSL ${url} -o gh_${version}_linux_amd64.tar.gz
-  tar xvf gh_${version}_linux_amd64.tar.gz
-  sudo cp gh_${version}_linux_amd64/bin/gh /usr/local/bin/
-  sudo rm -rf gh_${version}_linux_amd64*
+  url="https://github.com/cli/cli/releases/download/v${version}/gh_${version}_linux_${ARCH}.tar.gz"
+  curl -sSL ${url} -o gh_${version}.tar.gz
+  tar xvf gh_${version}.tar.gz
+  sudo cp gh_${version}_linux_${ARCH}/bin/gh /usr/local/bin/
+  sudo rm -rf gh_${version}_linux_${ARCH}*
   info "installed gh ${version}"
 fi
 

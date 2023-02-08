@@ -237,6 +237,6 @@ eval "$(starship init zsh)"
 # 1Password	CLI
 export OP_BIOMETRIC_UNLOCK_ENABLED=true
 # 1Password	CLI for gh. Setup with `op plugin init gh`
-if [ -f /Users/hilli/.op/plugins.sh ]; then
-	source /Users/hilli/.op/plugins.sh
+if [ -f ~/.op/plugins.sh ]; then
+	source ~/.op/plugins.sh
 fi

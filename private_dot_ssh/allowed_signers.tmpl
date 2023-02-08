@@ -2,4 +2,5 @@
 # Managed with chezmoi
 {{- range gitHubKeys .github_user -}}{{- if regexMatch "^ssh-ed25519" .Key -}}
 * {{ .Key -}}
-{{ end }}{{ end -}}
+{{ end }}
+{{ end -}}

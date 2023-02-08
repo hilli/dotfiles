@@ -1,7 +1,11 @@
 # https://starship.rs/config/
+
+command_timeout = 200
+
 [aws]
 disabled = true
 #symbol = "☁️\ue7ad "
+
 [gcloud]
 disabled = true
 
@@ -36,6 +40,7 @@ disabled = true
 
 [nodejs]
 symbol = "🤖 "
+disabled = true
 
 [time]
 disabled = false
@@ -44,3 +49,22 @@ time_format = "%T %Y-%m-%d"
 utc_time_offset = "+1"
 style = "white"
 time_range = "08:00:00-17:00:00"
+
+# Disabling some git functions - Using way to large repos for this to be useful
+[git_status]
+disabled = true
+
+[git_commit]
+disabled = true
+
+[git_state]
+disabled = true
+
+[git_metrics]
+disabled = true
+
+[git_branch]
+disabled = true
+
+[ruby]
+disabled = true

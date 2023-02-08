@@ -52,7 +52,8 @@
 
 [credential]
 {{- if (eq .chezmoi.os "darwin") }}
-	helper = osxkeychain
+  # helper = osxkeychain
+	helper = /usr/local/share/gcm-core/git-credential-manager
 {{- end }}
 
 [branch]
@@ -85,6 +86,7 @@
 	rebase = false
 [push]
 	default = simple
+	autoSetupRemote = true
 [credential "https://dev.azure.com"]
 	useHttpPath = true
 [diff "ansible-vault"]
@@ -92,5 +94,11 @@
 	cachetextconv = false
 [transfer]
 	fsckobjects = true
+[scalar]
+	repo = /Users/hilli/github/github
+	repo = /Users/hilli/github/codespaces-base
+[maintenance]
+	repo = /Users/hilli/github/github
+	repo = /Users/hilli/github/codespaces-base
 
 # vim: set filetype=gitconfig:

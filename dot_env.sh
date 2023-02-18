@@ -240,3 +240,6 @@ export OP_BIOMETRIC_UNLOCK_ENABLED=true
 if [ -f ~/.op/plugins.sh ]; then
 	source ~/.op/plugins.sh
 fi
+if [ -f ~/.config/op/plugins.sh ]; then
+	source ~/.config/op/plugins.sh
+fi

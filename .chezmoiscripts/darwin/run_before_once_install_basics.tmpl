@@ -1,2 +1,9 @@
 #!/bin/bash
-xcode-select --install || true
+
+xcode-select -p 1>/dev/null 2>&1
+
+if [ $? -ne 0 ]; then
+  echo "Xcode is not installed. Installing..."
+  xcode-select --install
+  /usr/bin/xcodebuild -license accept
+fi

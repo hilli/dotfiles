@@ -24,4 +24,4 @@ mas 'Speedtest', id: 1153157709
 mas 'Tailscale', id: 1475387142
 mas 'ToothFairy', id: 1191449274
 mas 'WiFi Explorer', id: 494803304
-mas 'Xcode', id: 497799835
+# mas 'Xcode', id: 497799835

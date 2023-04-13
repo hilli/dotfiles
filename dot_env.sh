@@ -243,3 +243,7 @@ fi
 if [ -f ~/.config/op/plugins.sh ]; then
 	source ~/.config/op/plugins.sh
 fi
+
+# Don't page result from the gh command
+export GH_PAGER=/bin/cat
+

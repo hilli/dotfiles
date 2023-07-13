@@ -63,6 +63,9 @@ else
   if [ "${ARCH}" = "aarch64" ]; then
     ARCH="arm64"
   fi
+  if [ "${ARCH}" = "x86_64" ]; then
+    ARCH="amd64"
+  fi
   info "will install gh version ${version}"
   url="https://github.com/cli/cli/releases/download/v${version}/gh_${version}_linux_${ARCH}.tar.gz"
   curl -sSL ${url} -o gh_${version}.tar.gz

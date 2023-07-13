@@ -1,3 +1,4 @@
+{{- if (eq .chezmoi.os "darwin") -}}
 #!/bin/bash
 
 xcode-select -p 1>/dev/null 2>&1
@@ -7,3 +8,4 @@ if [ $? -ne 0 ]; then
   xcode-select --install
   /usr/bin/xcodebuild -license accept
 fi
+{{- end -}}

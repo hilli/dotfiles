@@ -16,3 +16,4 @@ Brewfile.work.lock.json
 .vscode
 .devcontainer
 age-key.txt.age
+Pacmanfile

@@ -179,7 +179,9 @@ fi
 
 # rbenv
 if [ -d $HOME/.rbenv ]; then
-	export PATH="${HOME}/.rbenv/shims:${PATH}"
+	# Install with homebrew or
+	# curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash
+	eval "$(/home/hilli/.rbenv/bin/rbenv init - zsh)"
 fi
 if [ "$(command -v rbenv)" ]; then
 	eval "$(rbenv init -)"

@@ -67,7 +67,7 @@ if [ "${DISTRIBUTION}" = "Darwin" ]; then
   # iTerm name tab function
   function nametab() { echo -ne "\033]0;"$@"\007"; }
   # Homebrew
-  alias brewski='brew update && brew upgrade && brew cleanup; brew doctor'
+  alias brewski='brew update && brew upgrade --greedy && brew cleanup; brew doctor'
   # TailScale
   alias tailscale=/Applications/Tailscale.app/Contents/MacOS/Tailscale
 

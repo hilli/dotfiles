@@ -1,7 +1,7 @@
 {
   "recommendations": [
-    "bungcip.better-toml",
     "sidneys1.gitconfig",
-    "casualjim.gotemplate"
+    "casualjim.gotemplate",
+    "tamasfe.even-better-toml"
   ]
 }

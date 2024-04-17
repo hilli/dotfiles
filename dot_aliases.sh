@@ -71,11 +71,8 @@ if [ "${DISTRIBUTION}" = "Darwin" ]; then
   # TailScale
   alias tailscale=/Applications/Tailscale.app/Contents/MacOS/Tailscale
 
-  alias npm-vpn-off="osascript -e 'tell application \"Viscosity\" to disconnect \"npm\"'"
-  alias npm-vpn-on="osascript -e 'tell application \"Viscosity\" to connect \"npm\"'"
-  alias npm-staging-vpn-off="osascript -e 'tell application \"Viscosity\" to disconnect \"npm-staging\"'"
-  alias npm-staging-vpn-on="osascript -e 'tell application \"Viscosity\" to connect \"npm-staging\"'"
   alias vpn-dev="open https://fido-challenger.githubapp.com/auth/vpn-devvpn && osascript -e 'tell application \"Viscosity\" to connect \"github-iad-devvpn\"'"
+  alias vpn-prod="open https://fido-challenger.githubapp.com/auth/vpn-prod && osascript -e 'tell application \"Viscosity\" to connect \"github-iad-prod\"'"
 
   alias secpass_save='function _secpass_save(){ security add-generic-password -a hilli -s $1 -w $2 };_secpass_save'
   alias secpass_lookup='function _secpass_lookup(){ security find-generic-password -a hilli -s $1 -w };_secpass_lookup'

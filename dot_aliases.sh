@@ -186,3 +186,6 @@ alias keychain_login="security -v unlock-keychain ~/Library/Keychains/login.keyc
 
 # 1Password CLI
 alias oplogin="eval \$(op signin --account my)"
+
+# Docker for Mac does not listen on TCP by default
+alias docker_tcp_listener="socat TCP-LISTEN:2376,reuseaddr,fork UNIX-CONNECT:/var/run/docker.sock &"

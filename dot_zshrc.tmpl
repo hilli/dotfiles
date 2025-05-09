@@ -128,3 +128,10 @@ ulimit -n 3000
 
 # direnv https://github.com/direnv/direnv/wiki/PS1
 #PS1="${CUSTOM_PS1:-${PROMPT}}: "
+
+alias k=kubectl
+complete -F __start_kubectl k
+
+# Makefile target completion
+zstyle ':completion:*:*:make:*' tag-order 'targets'
+autoload -U compinit && compinit

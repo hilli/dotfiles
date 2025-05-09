@@ -144,6 +144,15 @@ function cd() {
   builtin cd "$dir"
 }
 
+# cd to a directory and create it if it doesn't exist
+function mkcd() {
+  if [ -z "$1" ]; then
+    echo "Usage: mkcd <directory>"
+    return
+  fi
+  mkdir -p "$1" && cd "$1"
+}
+
 ## Use SvelteKit to bootstrap a new svelte project and kickstart it.
 function svelte-me() {
   npm init svelte@next "$1"
@@ -189,3 +198,8 @@ alias oplogin="eval \$(op signin --account my)"
 
 # Docker for Mac does not listen on TCP by default
 alias docker_tcp_listener="socat TCP-LISTEN:2376,reuseaddr,fork UNIX-CONNECT:/var/run/docker.sock &"
+
+# Fix terminfo on remote ssh server
+function ghostty-ssh-fix() {
+  infocmp -x ghostty | ssh "$1" -- tic -x -
+}

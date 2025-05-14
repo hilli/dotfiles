@@ -53,22 +53,22 @@ cd "${script_dir}" || exit
 # Brewfile.work:        {{ include "Brewfile-mas.work" | sha256sum }}
 
 {{- if eq .desktop false }}
-brew bundle --no-lock --file Brewfile
+brew bundle --file Brewfile
 {{/* brew bundle --no-lock --file Brewfile-mas */}}
 {{- if eq .personal true }}
-brew bundle --no-lock --file Brewfile.home
-{{/* brew bundle --no-lock --file Brewfile-mas.home */}}
+brew bundle --file Brewfile.home
+{{/* brew bundle --file Brewfile-mas.home */}}
 {{ if eq .chezmoi.arch "arm64" }}
-# brew bundle --no-lock --file Brewfile.arm64.home
+# brew bundle --file Brewfile.arm64.home
 # Awaiting mas fixing this before iPad apps can get installed: https://github.com/mas-cli/mas/issues/321
 {{ end }}
 {{- end }}
 {{- if eq .personal false }}
-brew bundle --no-lock --file Brewfile.work
+brew bundle --file Brewfile.work
 {{/* brew bundle --no-lock --file Brewfile-mas.work */}}
 {{- end }}
 {{- else }}
 {{/* .desktop is true */}}
-brew bundle --no-lock --file Brewfile.macserver
+brew bundle --file Brewfile.macserver
 {{- end }}
 {{- end -}}

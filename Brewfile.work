@@ -6,3 +6,4 @@
 brew 'kind'
 brew 'kubectl'
 brew 'k9s'
+cask 'microsoft-teams'

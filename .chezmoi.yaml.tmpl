@@ -21,7 +21,7 @@ color: true
 {{-   $hostname = output "scutil" "--get" "ComputerName" | trim -}}
 {{- end -}}
 {{/* Determine ownership from hostname */}}
-{{- if eq $hostname "ultra1" "maclap1" -}}
+{{- if eq $hostname "ultra1" "maclap1" "minim1" "minim4" -}}
 {{- writeToStdout "Personal macOS host detected from hostname...\n" -}}
 {{-   $personal = true -}}
 {{- end }}

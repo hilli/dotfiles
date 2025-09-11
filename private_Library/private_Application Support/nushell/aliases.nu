@@ -21,10 +21,6 @@ alias ll = ls -l
 # ls all long
 alias la = ls -la
 
-
-
-
-
 # Git: status
 alias g = git status
 

@@ -20,8 +20,6 @@
 # You can remove these comments if you want or leave
 # them for future reference.
 
-
-
 $env.config.show_banner = false # Hide the banner
 $env.config.buffer_editor = "code"
 

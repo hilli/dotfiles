@@ -1,0 +1,1 @@
+- We are going to be using slash commands from .github/prompts if there are files in that directory.

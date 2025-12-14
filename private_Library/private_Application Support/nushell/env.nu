@@ -22,8 +22,6 @@ use std/util "path add"
 #
 # Paths
 #
-path add /opt/homebrew/bin
-path add /opt/homebrew/sbin
 path add /System/Cryptexes/App/usr/bin
 path add /usr/local/bin
 path add /bin
@@ -43,6 +41,8 @@ path add ~/.go/bin
 path add ~/.lmstudio/bin
 path add ~/.orbstack/bin
 path add ~/.rbenv/shims
+path add /opt/homebrew/bin
+path add /opt/homebrew/sbin
 path add ~/bin
 
 

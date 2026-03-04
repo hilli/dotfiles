@@ -75,10 +75,6 @@ if [ "$(uname)" = "Darwin" ]; then
 	if [ -d /opt/chefdk/bin ]; then
 		export PATH=/opt/chefdk/bin:$PATH
 	fi
-	# RBENV in /usr/local
-	if [ -d /usr/local/rbenv ]; then
-		export RBENV_ROOT=/usr/local/rbenv
-	fi
 
 	# Swift
 	if [ -f ~/.swiftenv/bin/swiftenv ]; then
@@ -178,14 +174,14 @@ fi
 # export HOMEBREW_GITHUB_API_TOKEN="$(skate get HOMEBREW_GITHUB_API_TOKEN)"
 
 # rbenv
-if [ -d $HOME/.rbenv ]; then
+#if [ -d $HOME/.rbenv ]; then
 	# Install with homebrew or
 	# curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash
-	eval "$(/home/hilli/.rbenv/bin/rbenv init - zsh)"
-fi
-if [ "$(command -v rbenv)" ]; then
-	eval "$(rbenv init -)"
-fi
+#	eval "$(/home/hilli/.rbenv/bin/rbenv init - zsh)"
+#fi
+#if [ "$(command -v rbenv)" ]; then
+#	eval "$(rbenv init -)"
+#fi
 
 # iTerm2
 [[ ${TERM_PROGRAM} == "iTerm.app" ]] && source "${HOME}/.iterm2_shell_integration.zsh" || true
@@ -250,3 +246,7 @@ fi
 export GH_PAGER=/bin/cat
 
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
+
+if [ "$(command -v mise)" ]; then
+  eval "$(mise activate zsh)"
+fi

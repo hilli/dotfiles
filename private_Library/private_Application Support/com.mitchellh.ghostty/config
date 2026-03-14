@@ -1,0 +1,93 @@
+# Ghostty Configuration
+# Updated to use latest features (up to v1.3.0)
+# Reload changes with cmd+shift+,
+
+# ── Theme ──────────────────────────────────────────────────────────────
+# Tokyo Night Storm: vibrant colors on a deep blue-gray background.
+# Supports automatic light/dark switching with your macOS appearance.
+theme = light:TokyoNight Day,dark:TokyoNight Storm
+
+# ── Font ───────────────────────────────────────────────────────────────
+font-family = FiraCode Nerd Font Mono
+font-size = 14
+font-thicken = true
+font-thicken-strength = 100
+
+# Enable stylistic ligatures (Fira Code's signature feature)
+font-feature = calt
+font-feature = ss01
+font-feature = ss02
+font-feature = ss03
+font-feature = ss05
+font-feature = ss06
+
+# Break ligatures under the cursor so you can see individual characters
+font-shaping-break = cursor
+
+# ── Cursor ─────────────────────────────────────────────────────────────
+cursor-style = bar
+cursor-style-blink = false
+cursor-opacity = 0.85
+cursor-click-to-move = true
+
+# ── Window & Titlebar ─────────────────────────────────────────────────
+macos-titlebar-style = tabs
+macos-option-as-alt = left
+window-padding-x = 8
+window-padding-y = 4
+window-padding-balance = true
+window-padding-color = extend
+window-save-state = always
+window-inherit-font-size = true
+window-colorspace = display-p3
+
+# ── Background Transparency & Blur ────────────────────────────────────
+background-opacity = 0.92
+background-blur = 20
+
+# ── Splits ─────────────────────────────────────────────────────────────
+unfocused-split-opacity = 0.85
+split-preserve-zoom = navigation
+
+# ── Selection & Clipboard ─────────────────────────────────────────────
+copy-on-select = clipboard
+clipboard-trim-trailing-spaces = true
+clipboard-paste-protection = true
+selection-clear-on-typing = true
+
+# ── Mouse & Scrolling ─────────────────────────────────────────────────
+mouse-hide-while-typing = true
+focus-follows-mouse = true
+mouse-scroll-multiplier = 3
+
+# ── Shell Integration ─────────────────────────────────────────────────
+shell-integration = detect
+shell-integration-features = cursor,sudo,title
+
+# ── Palette (v1.3.0) ──────────────────────────────────────────────────
+# Auto-generate a harmonious 256-color palette from the theme's base 16
+palette-generate = true
+
+# ── Notifications (v1.3.0) ────────────────────────────────────────────
+# Get notified when long-running commands finish (if terminal is unfocused)
+notify-on-command-finish = unfocused
+notify-on-command-finish-action = notify
+notify-on-command-finish-after = 10s
+
+# ── Misc UX ───────────────────────────────────────────────────────────
+confirm-close-surface = true
+minimum-contrast = 1.1
+resize-overlay = after-first
+resize-overlay-position = bottom-right
+link-url = true
+scrollbar = never
+
+# ── Quick Terminal ─────────────────────────────────────────────────────
+quick-terminal-position = top
+quick-terminal-animation-duration = 0.15
+quick-terminal-autohide = true
+quick-terminal-space-behavior = move
+
+# ── Keybindings ────────────────────────────────────────────────────────
+# Quick terminal toggle (global hotkey)
+keybind = global:ctrl+grave_accent=toggle_quick_terminal

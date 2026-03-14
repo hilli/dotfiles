@@ -1,0 +1,67 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "session": {
+    "trust_all_worktrees": true
+  },
+  "icon_theme": "Catppuccin Mocha",
+  "agent": {
+    "favorite_models": [
+      {
+        "provider": "copilot_chat",
+        "model": "gpt-5.4",
+        "enable_thinking": false
+      },
+      {
+        "provider": "copilot_chat",
+        "model": "gpt-5.3-codex",
+        "enable_thinking": false
+      },
+      {
+        "provider": "copilot_chat",
+        "model": "claude-opus-4.6",
+        "enable_thinking": false
+      }
+    ],
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "claude-opus-4.6"
+    },
+    "model_parameters": []
+  },
+  "context_servers": {
+    "github-activity-summarizer": {
+      "enabled": false,
+      "settings": {},
+    },
+    "mcp-server-context7": {
+      "enabled": true,
+      "settings": {
+        "context7_api_key": "{{ onepasswordRead "op://Private/Context7 API Key/credential" }}",
+      },
+    },
+    "mcp-server-github": {
+      "enabled": true,
+      "settings": {
+        "github_personal_access_token": "{{ onepasswordRead "op://Private/GitHub MCP PAT/credential" }}",
+      },
+    },
+    "postgres-context-server": {
+      "enabled": true,
+      "settings": {
+        "database_url": "postgres://{{ onepasswordRead "op://Private/Cocktailtime Postgres/username" }}:{{ onepasswordRead "op://Private/Cocktailtime Postgres/password" }}@{{ onepasswordRead "op://Private/Cocktailtime Postgres/server" }}:{{ onepasswordRead "op://Private/Cocktailtime Postgres/port number" }}/{{ onepasswordRead "op://Private/Cocktailtime Postgres/database" }}?{{ onepasswordRead "op://Private/Cocktailtime Postgres/connection options" }}",
+      },
+    },
+  },
+  "autosave": "on_focus_change",
+  "base_keymap": "VSCode",
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": "Catppuccin Mocha",
+}

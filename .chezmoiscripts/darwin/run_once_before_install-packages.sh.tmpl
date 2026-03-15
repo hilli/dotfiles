@@ -18,39 +18,18 @@ function banner {
 
 banner "macOS package install"
 
-# Install Homebrew
-if [ ! "$(command -v brew)" ]; then
-  if [[ ! -f "/usr/local/bin/brew" || ! -f "/opt/homebrew/bin/brew" ]]; then
-    # Homebrew already installed - But path is screwed up
-    export PATH="/usr/local/bin:/opt/homebrew/bin:$PATH"
-  else
-    echo "Installing Homebrew"
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    export PATH="/usr/local/bin:/opt/homebrew/bin:$PATH"
-  fi
-fi
-
-# Install packages needed
 export PATH="/usr/local/bin:/opt/homebrew/bin:$PATH"
-if [ ! "$(command -v mas)" ]; then
-  brew install mas
-fi
-{{/* mas install 497799835 || true # Xcode
-sudo xcodebuild -license accept || true */}}
-if [ "$(uname -m)" == "arm64" ]; then
-  sudo softwareupdate --install-rosetta --agree-to-license
-fi
 
 cd "${script_dir}" || exit
 
 # Brewfile hashes (To rerun this script when Brewfile changes):
 # Brewfile:             {{ include "Brewfile" | sha256sum }}
-# Brewfile:             {{ include "Brewfile-mas" | sha256sum }}
+# Brewfile-mas:         {{ include "Brewfile-mas" | sha256sum }}
 # Brewfile.home:        {{ include "Brewfile.home" | sha256sum }}
-# Brewfile.home:        {{ include "Brewfile-mas.home" | sha256sum }}
+# Brewfile-mas.home:    {{ include "Brewfile-mas.home" | sha256sum }}
 # Brewfile.arm64.home:  {{ include "Brewfile.arm64.home" | sha256sum }}
 # Brewfile.work:        {{ include "Brewfile.work" | sha256sum }}
-# Brewfile.work:        {{ include "Brewfile-mas.work" | sha256sum }}
+# Brewfile-mas.work:    {{ include "Brewfile-mas.work" | sha256sum }}
 
 {{- if eq .desktop false }}
 brew bundle --file Brewfile

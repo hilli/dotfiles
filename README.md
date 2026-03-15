@@ -16,7 +16,7 @@ Simply run this in the shell:
 sh -c "$(curl -fsLS chezmoi.io/get)" -- init --apply hilli
 ```
 
-On a macOS machine, be sure that you are signed into the App Store
+On a macOS machine, be sure that you are signed into the App Store and have installed 1Password from the App Store and signed in to it (the latter is a personal note).
 
 ### Codespaces
 

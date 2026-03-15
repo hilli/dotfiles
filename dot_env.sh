@@ -38,7 +38,7 @@ fi
 # OS X specifics
 if [ "$(uname)" = "Darwin" ]; then
 	export LC_CTYPE=en_US.UTF-8
-	export EDITOR='code --wait'
+	export EDITOR='zed --wait'
 
 	ARCH="$(uname -m)"
 

@@ -1,12 +1,5 @@
 ---
-edit:
-  command: "code"
-  args: ["--wait"]
 color: true
-
-onepassword:
-  command: "op"
-  prompt: false
 {{- $name := "Jens Hilligsøe" -}}
 {{- $email := "jens@hilli.dk" -}}
 {{- $github_user := "hilli" -}}
@@ -21,7 +14,7 @@ onepassword:
 {{-   $hostname = output "scutil" "--get" "ComputerName" | trim -}}
 {{- end -}}
 {{/* Determine ownership from hostname */}}
-{{- if eq $hostname "ultra1" "maclap1" "minim1" "minim4" -}}
+{{- if eq $hostname "ultra1" "maclap1" "minim1" "minim4" "hillimbp2024" -}}
 {{- writeToStdout "Personal macOS host detected from hostname...\n" -}}
 {{-   $personal = true -}}
 {{- end }}
@@ -47,10 +40,22 @@ sourceDir: {{ .chezmoi.sourceDir | quote }}
 {{/* {{- writeToStdout "Desktop: " ($desktop | quote) "\n" -}} */}}
 
 {{- if not $ephemeral }}
+edit:
+  command: "zed"
+  args: ["--wait"]
+
+onepassword:
+  command: "op"
+  prompt: false
+
 encryption: "age"
 age:
   identity: "~/.age-key.txt"
   recipient: "age1dzj2wu2xg927nkqwtrx2fm7hc8jv9qkyl58y9zxkcvj5pgppdp5s54343g"
+{{ else }}
+edit:
+  command: "code"
+  args: ["--wait"]
 {{ end -}}
 
 data:

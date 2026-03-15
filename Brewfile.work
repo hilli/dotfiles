@@ -4,7 +4,7 @@
 # brew 'packer'
 # brew 'pre-commit'
 brew 'kind'
-brew 'kubectl'
+brew 'kubernetes-cli'
 brew 'k9s'
 cask 'microsoft-teams'
 cask 'yubico-yubikey-manager'

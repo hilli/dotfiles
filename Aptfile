@@ -16,7 +16,7 @@ libreadline-dev
 libssl-dev
 libyaml-dev
 procps
-silversearcher-ag
+ripgrep
 tmux
 tree
 vim

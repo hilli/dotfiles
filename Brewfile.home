@@ -1,7 +1,4 @@
-tap 'axiomhq/tap'
-brew 'axiomhq/tap/axiom'
 # brew 'homeassistant-cli'
-brew 'poppler'
 brew 'rclone'
 
 cask 'balenaetcher'

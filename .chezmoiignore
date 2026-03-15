@@ -17,3 +17,12 @@ Brewfile.work.lock.json
 .devcontainer
 age-key.txt.age
 Pacmanfile
+test
+
+{{ if .ephemeral }}
+.config/zed
+{{ end }}
+
+{{ if ne .chezmoi.os "darwin" }}
+Library
+{{ end }}

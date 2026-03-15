@@ -3,6 +3,7 @@
 # brew 'nomad'
 # brew 'packer'
 # brew 'pre-commit'
+brew 'azure-cli'
 brew 'kind'
 brew 'kubernetes-cli'
 brew 'k9s'

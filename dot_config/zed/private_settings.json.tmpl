@@ -7,11 +7,23 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "agent_servers": {
+    "github-copilot-cli": {
+      "type": "registry",
+    },
+  },
   "session": {
-    "trust_all_worktrees": true
+    "trust_all_worktrees": true,
   },
   "icon_theme": "Catppuccin Mocha",
   "agent": {
+    "tool_permissions": {
+      "tools": {
+        "terminal": {
+          "default": "allow"
+        }
+      }
+    },
     "favorite_models": [
       {
         "provider": "copilot_chat",
@@ -63,5 +75,5 @@
   "base_keymap": "VSCode",
   "ui_font_size": 16,
   "buffer_font_size": 15,
-  "theme": "Catppuccin Mocha",
+  "theme": "Catppuccin Frappé",
 }

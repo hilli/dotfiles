@@ -58,6 +58,9 @@ edit:
   args: ["--wait"]
 {{ end -}}
 
+merge:
+  command: "meld"
+
 data:
   name: {{ $name }}
   ephemeral: {{ $ephemeral }}

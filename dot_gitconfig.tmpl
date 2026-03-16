@@ -95,12 +95,15 @@
 	repo = /Users/hilli/github/github
 [maintenance]
 	repo = /Users/hilli/github/github
-
-[credential "https://dev.azure.com"]
-	useHttpPath = true
 [fsck]
 	zeroPaddedFilemode = ignore
 [fetch]
 	prune = true
 
 # vim: set filetype=gitconfig:
+[url "ssh://git@github.com/hilli"]
+	insteadOf = https://github.com/hilli
+[credential "https://github.com"]
+	username = hilli
+[credential "https://dev.azure.com"]
+	useHttpPath = true

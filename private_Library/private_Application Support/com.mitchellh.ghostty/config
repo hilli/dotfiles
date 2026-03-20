@@ -91,3 +91,6 @@ quick-terminal-space-behavior = move
 # ── Keybindings ────────────────────────────────────────────────────────
 # Quick terminal toggle (global hotkey)
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
+
+shell-integration = detect
+shell-integration-features = ssh-terminfo,ssh-env

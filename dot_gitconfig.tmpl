@@ -2,7 +2,7 @@
 	name = {{ .name }}
 	email = {{ .email }}
 	#signingkey = CE1CF90A
-	signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKEcl1fnXIV3u0Q8E1rT6FsalcEGV+pLi44gqthZEq4e hilli@github.com"
+	signingkey = ~/.ssh/hilli_ed25519.pub
 
 [core]
 	autocrlf = false
@@ -58,7 +58,7 @@
 [branch]
 	autosetuprebase = always
 [commit]
-	gpgsign = false
+	gpgsign = true
 	verbose = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -71,7 +71,7 @@
 [gpg "ssh"]
 	allowedSignersFile = ~/.ssh/allowed_signers
 [tag]
-	gpgsign = false
+	gpgsign = true
 [init]
 	defaultBranch = main
 [rebase]

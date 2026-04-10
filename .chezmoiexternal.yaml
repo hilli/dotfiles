@@ -2,7 +2,7 @@
 .oh-my-zsh:
   type: archive
   url: https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz
-  extract: true
+  exact: true
   stripComponents: 1
   refreshPeriod: 168h
 .oh-my-zsh/custom/plugins/zsh-syntax-highlighting:

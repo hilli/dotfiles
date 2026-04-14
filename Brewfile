@@ -103,6 +103,7 @@ cask '1password-cli'
 # cask 'arq'
 cask 'copilot-cli'
 cask 'dash'
+cask 'dockdoor'
 # cask 'datadog-agent', greedy: true
 # cask 'discord'
 # cask 'docker'

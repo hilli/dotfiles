@@ -106,6 +106,7 @@ cask 'copilot-cli'
 cask 'dash'
 cask 'discord'
 cask 'dockdoor'
+cask 'docker-desktop'
 # cask 'datadog-agent', greedy: true
 # cask 'discord'
 # cask 'docker'

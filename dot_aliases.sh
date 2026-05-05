@@ -213,3 +213,22 @@ alias docker_tcp_listener="socat TCP-LISTEN:2376,reuseaddr,fork UNIX-CONNECT:/va
 function ghostty-ssh-fix() {
   infocmp -x ghostty | ssh "$1" -- tic -x -
 }
+
+# Ues the macOS keychain to store secrets
+function secret-set() {
+  if [[ $# -lt 2 ]]; then
+    echo "Usage: secret-set <KEY_NAME> <value>"
+    return 1
+  fi
+  security add-generic-password -U -a "$USER" -s "$1" -w "$2"
+  echo "Stored $1"
+}
+
+# Use the macOS keychain to retrieve secrets
+function secret-get() {
+  if [[ $# -lt 1 ]]; then
+    echo "Usage: secret-get <KEY_NAME>"
+    return 1
+  fi
+  security find-generic-password -a "$USER" -s "$1" -w 2>/dev/null
+}

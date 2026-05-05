@@ -131,6 +131,16 @@ function cd() {
     return
   fi
   dir="$(grealpath -m "${1:-$HOME}")"
+  GITHUB_COM_ROOT="$HOME/github.com"
+  if [[ "$dir" = $GITHUB_COM_ROOT/*/* ]]; then
+    # ~/github.com/user/repo → gh repo clone user/repo
+    local rel="${dir#$GITHUB_COM_ROOT/}"
+    local user_repo="${rel%%/*}"
+    rel="${rel#*/}"
+    user_repo="$user_repo/${rel%%/*}"
+    local repo_dir="$GITHUB_COM_ROOT/$user_repo"
+    [[ -d "$repo_dir" ]] || gh repo clone "$user_repo" "$repo_dir"
+  fi
   if [[ "$dir" = $GITHUB_ROOT/* ]]; then
     repo="${dir#$GITHUB_ROOT/}"
     repo_dir="$GITHUB_ROOT/${repo%%/*}"

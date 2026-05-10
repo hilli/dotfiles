@@ -29,6 +29,7 @@ cursor-style = bar
 cursor-style-blink = false
 cursor-opacity = 0.85
 cursor-click-to-move = true
+cursor-invert-fg-bg = true
 
 # ── Window & Titlebar ─────────────────────────────────────────────────
 macos-titlebar-style = tabs

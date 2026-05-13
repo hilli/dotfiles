@@ -232,3 +232,5 @@ function secret-get() {
   fi
   security find-generic-password -a "$USER" -s "$1" -w 2>/dev/null
 }
+
+alias skill='kill -9 $(ps aux | fzf | awk "{print \$2}")'

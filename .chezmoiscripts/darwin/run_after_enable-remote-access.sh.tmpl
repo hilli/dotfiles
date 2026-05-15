@@ -1,0 +1,121 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+set -euo pipefail
+
+PATH="/usr/bin:/bin:/usr/sbin:/sbin"
+
+readonly SSH_ACCESS_GROUP="com.apple.access_ssh"
+readonly SSH_SERVICE="com.openssh.sshd"
+readonly SSH_LABEL="system/${SSH_SERVICE}"
+readonly SSH_PLIST="/System/Library/LaunchDaemons/ssh.plist"
+readonly SCREEN_SHARING_ACCESS_GROUP="com.apple.access_screensharing"
+readonly SCREEN_SHARING_SERVICE="com.apple.screensharing"
+readonly SCREEN_SHARING_LABEL="system/${SCREEN_SHARING_SERVICE}"
+readonly SCREEN_SHARING_PLIST="/System/Library/LaunchDaemons/com.apple.screensharing.plist"
+
+function run_as_root {
+  if [ "$(id -u)" -eq 0 ]; then
+    "$@"
+  else
+    sudo "$@"
+  fi
+}
+
+function remote_access_user {
+  local user="${SUDO_USER:-}"
+
+  if [ -z "${user}" ] || [ "${user}" = "root" ]; then
+    user="$(id -un)"
+  fi
+
+  if [ -z "${user}" ] || [ "${user}" = "root" ]; then
+    user="$(stat -f "%Su" /dev/console)"
+  fi
+
+  if [ -z "${user}" ] || [ "${user}" = "root" ] || [ "${user}" = "loginwindow" ]; then
+    echo "Unable to determine the local user to grant remote access to." >&2
+    exit 1
+  fi
+
+  printf "%s\n" "${user}"
+}
+
+function ensure_group {
+  local group="$1"
+
+  if ! dscl . -read "/Groups/${group}" >/dev/null 2>&1; then
+    run_as_root dseditgroup -o create -q "${group}"
+  fi
+}
+
+function ensure_user_in_group {
+  local user="$1"
+  local group="$2"
+
+  ensure_group "${group}"
+
+  if ! dseditgroup -o checkmember -m "${user}" "${group}" >/dev/null 2>&1; then
+    run_as_root dseditgroup -o edit -a "${user}" -t user "${group}"
+  fi
+}
+
+function launch_service_enabled {
+  local service="$1"
+
+  launchctl print-disabled system 2>/dev/null | grep -q "\"${service}\" => enabled"
+}
+
+function ensure_launch_service_loaded {
+  local label="$1"
+  local plist="$2"
+
+  if ! launchctl print "${label}" >/dev/null 2>&1; then
+    run_as_root launchctl bootstrap system "${plist}"
+  fi
+}
+
+function enable_remote_login {
+  local user="$1"
+
+  if [ ! -f "${SSH_PLIST}" ]; then
+    echo "Missing SSH launch daemon: ${SSH_PLIST}" >&2
+    exit 1
+  fi
+
+  ensure_user_in_group "${user}" "${SSH_ACCESS_GROUP}"
+
+  if ! launch_service_enabled "${SSH_SERVICE}"; then
+    run_as_root systemsetup -setremotelogin on
+  fi
+
+  ensure_launch_service_loaded "${SSH_LABEL}" "${SSH_PLIST}"
+}
+
+function enable_screen_sharing {
+  local user="$1"
+
+  if [ ! -f "${SCREEN_SHARING_PLIST}" ]; then
+    echo "Missing Screen Sharing launch daemon: ${SCREEN_SHARING_PLIST}" >&2
+    exit 1
+  fi
+
+  ensure_user_in_group "${user}" "${SCREEN_SHARING_ACCESS_GROUP}"
+
+  if ! launch_service_enabled "${SCREEN_SHARING_SERVICE}"; then
+    run_as_root launchctl enable "${SCREEN_SHARING_LABEL}"
+  fi
+
+  ensure_launch_service_loaded "${SCREEN_SHARING_LABEL}" "${SCREEN_SHARING_PLIST}"
+}
+
+user="$(remote_access_user)"
+
+echo "Enabling SSH Remote Login for ${user}..."
+enable_remote_login "${user}"
+
+echo "Enabling Screen Sharing (VNC) for ${user}..."
+enable_screen_sharing "${user}"
+
+echo "Remote SSH and VNC access are enabled for ${user}."
+{{ end }}

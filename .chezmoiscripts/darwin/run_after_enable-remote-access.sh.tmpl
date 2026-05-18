@@ -10,6 +10,7 @@ readonly SSH_ACCESS_GROUP="com.apple.access_ssh"
 readonly SSH_SERVICE="com.openssh.sshd"
 readonly SSH_LABEL="system/${SSH_SERVICE}"
 readonly SSH_PLIST="/System/Library/LaunchDaemons/ssh.plist"
+readonly SSHD_CONFIG="/etc/ssh/sshd_config"
 readonly SCREEN_SHARING_ACCESS_GROUP="com.apple.access_screensharing"
 readonly SCREEN_SHARING_SERVICE="com.apple.screensharing"
 readonly SCREEN_SHARING_LABEL="system/${SCREEN_SHARING_SERVICE}"
@@ -76,6 +77,27 @@ function ensure_launch_service_loaded {
   fi
 }
 
+function disable_ssh_password_authentication {
+  if [ ! -f "${SSHD_CONFIG}" ]; then
+    echo "Missing SSH server config: ${SSHD_CONFIG}" >&2
+    exit 1
+  fi
+
+  if grep -Eq '^[[:space:]]*PasswordAuthentication[[:space:]]+no([[:space:]]*(#.*)?)?$' "${SSHD_CONFIG}"; then
+    return
+  fi
+
+  echo "Disabling SSH password authentication..."
+
+  if grep -Eq '^[[:space:]]*#?[[:space:]]*PasswordAuthentication[[:space:]]+' "${SSHD_CONFIG}"; then
+    run_as_root sed -i '' -E 's/^[[:space:]]*#?[[:space:]]*PasswordAuthentication[[:space:]]+[^[:space:]#]+([[:space:]]*(#.*)?)?$/PasswordAuthentication no/' "${SSHD_CONFIG}"
+  else
+    run_as_root sed -i '' -e "\$a\\
+PasswordAuthentication no
+" "${SSHD_CONFIG}"
+  fi
+}
+
 function enable_remote_login {
   local user="$1"
 
@@ -85,6 +107,7 @@ function enable_remote_login {
   fi
 
   ensure_user_in_group "${user}" "${SSH_ACCESS_GROUP}"
+  disable_ssh_password_authentication
 
   if ! launch_service_enabled "${SSH_SERVICE}"; then
     run_as_root systemsetup -setremotelogin on

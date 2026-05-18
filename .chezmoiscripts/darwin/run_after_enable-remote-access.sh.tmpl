@@ -5,6 +5,7 @@ set -euo pipefail
 
 PATH="/usr/bin:/bin:/usr/sbin:/sbin"
 
+{{- if .personal }}
 readonly SSH_ACCESS_GROUP="com.apple.access_ssh"
 readonly SSH_SERVICE="com.openssh.sshd"
 readonly SSH_LABEL="system/${SSH_SERVICE}"
@@ -118,4 +119,7 @@ echo "Enabling Screen Sharing (VNC) for ${user}..."
 enable_screen_sharing "${user}"
 
 echo "Remote SSH and VNC access are enabled for ${user}."
+{{- else }}
+echo "Skipping SSH Remote Login and Screen Sharing setup on work macOS host {{ .hostname }}."
+{{- end }}
 {{ end }}

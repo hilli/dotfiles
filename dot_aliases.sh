@@ -13,7 +13,7 @@ alias gc='git commit -v'
 alias gca='git commit -v -a'
 # Commit pending changes and quote all args as message
 function gg() {
-  git commit -v -a -m "$*"
+    git commit -v -a -m "$*"
 }
 alias gco='git checkout '
 alias gd='git diff'
@@ -28,20 +28,20 @@ alias eg='subl .git/config'
 alias gbd='git branch -D'
 # Git clone from GitHub
 function gch() {
-  git clone git://github.com/$USER/$1.git
+    git clone git://github.com/$USER/$1.git
 }
 function gitgrep() {
-  git rev-list --all | xargs git grep $@
+    git rev-list --all | xargs git grep $@
 }
 alias git_clean_merged_branches='git branch --merged | egrep -v "(^\*|master)" | xargs git branch -d'
 # Setup a tracking branch from [remote] [branch_name]
 function gbt() {
-  git branch --track $2 $1/$2 && git checkout $2
+    git branch --track $2 $1/$2 && git checkout $2
 }
 # Quickly clobber a file and checkout
 function grf() {
-  rm $1
-  git checkout $1
+    rm $1
+    git checkout $1
 }
 
 # Run mutt under plain xterm TERM type
@@ -53,47 +53,47 @@ alias irssi='TERM=screen-256color irssi'
 alias beep='echo -en "\007"'
 
 if [ "${DISTRIBUTION}" = "Darwin" ]; then
-  alias topc='top -o cpu'
-  alias flushdns='dscacheutil -flushcache'
-  # Quick way to rebuild the Launch Services database and get rid
-  # # of duplicates in the Open With submenu.
-  alias fixopenwith='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user'
-  # alias ls='exa --git'
+    alias topc='top -o cpu'
+    alias flushdns='dscacheutil -flushcache'
+    # Quick way to rebuild the Launch Services database and get rid
+    # # of duplicates in the Open With submenu.
+    alias fixopenwith='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user'
+    # alias ls='exa --git'
 
-  function notify() {
-    osascript -e "display notification \"$*\" with title \"Shell notification\""
-  }
+    function notify() {
+        osascript -e "display notification \"$*\" with title \"Shell notification\""
+    }
 
-  # iTerm name tab function
-  function nametab() { echo -ne "\033]0;"$@"\007"; }
-  # Homebrew
-  alias brewski='brew update && brew upgrade --greedy && brew cleanup; brew doctor'
-  # TailScale
-  alias tailscale=/Applications/Tailscale.app/Contents/MacOS/Tailscale
+    # iTerm name tab function
+    function nametab() { echo -ne "\033]0;"$@"\007"; }
+    # Homebrew
+    alias brewski='brew update && brew upgrade -y --greedy && brew cleanup --prune=all; brew doctor'
+    # TailScale
+    alias tailscale=/Applications/Tailscale.app/Contents/MacOS/Tailscale
 
-  alias vpn-dev="open https://fido-challenger.githubapp.com/auth/vpn-devvpn && osascript -e 'tell application \"Viscosity\" to connect \"github-iad-devvpn\"'"
-  alias vpn-prod="open https://fido-challenger.githubapp.com/auth/vpn-prod && osascript -e 'tell application \"Viscosity\" to connect \"github-iad-prod\"'"
+    alias vpn-dev="open https://fido-challenger.githubapp.com/auth/vpn-devvpn && osascript -e 'tell application \"Viscosity\" to connect \"github-iad-devvpn\"'"
+    alias vpn-prod="open https://fido-challenger.githubapp.com/auth/vpn-prod && osascript -e 'tell application \"Viscosity\" to connect \"github-iad-prod\"'"
 
-  alias secpass_save='function _secpass_save(){ security add-generic-password -a hilli -s $1 -w $2 };_secpass_save'
-  alias secpass_lookup='function _secpass_lookup(){ security find-generic-password -a hilli -s $1 -w };_secpass_lookup'
+    alias secpass_save='function _secpass_save(){ security add-generic-password -a hilli -s $1 -w $2 };_secpass_save'
+    alias secpass_lookup='function _secpass_lookup(){ security find-generic-password -a hilli -s $1 -w };_secpass_lookup'
 fi
 
 if [ "${DISTRIBUTION}" = "debian" ]; then
-  alias open="gnome-open"
+    alias open="gnome-open"
 fi
 
 if [ "$(uname)" = "Linux" ]; then
-  # Add some color when using GNU ls
-  alias d="ls --color"
-  alias ls="ls --color=auto"
-  alias ll="ls --color -l"
+    # Add some color when using GNU ls
+    alias d="ls --color"
+    alias ls="ls --color=auto"
+    alias ll="ls --color -l"
 fi
 
 alias rssh="ssh -t -o RemoteCommand='sudo su -'"
 alias pssh="ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no"
 
 function dkwhois() {
-  whois -h whois.dk-hostmaster.dk " --show-handles --charset=utf-8 $1"
+    whois -h whois.dk-hostmaster.dk " --show-handles --charset=utf-8 $1"
 }
 
 # Docker
@@ -105,12 +105,12 @@ alias dri="docker rmi \$(docker images -q)"
 # Run image in interactive container
 alias dki="docker run -t -i -P"
 function dcontext() {
-  echo "Setting docker context to"
-  if [ -z "$1" ]; then
-    docker context use default
-  else
-    docker context use "$1"
-  fi
+    echo "Setting docker context to"
+    if [ -z "$1" ]; then
+        docker context use default
+    else
+        docker context use "$1"
+    fi
 }
 
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
@@ -118,86 +118,86 @@ alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 # Clever auto checkout of your most used repos
 # Uses grealpath from coreutils (brew install coreutils && brew link coreutils)
 if [ -f /usr/bin/realpath ]; then
-  alias grealpath="realpath -s"
+    alias grealpath="realpath -s"
 fi
 function cd() {
-  GITHUB_ROOT="$HOME/github"
-  NPM_ROOT="$HOME/npm"
-  if [[ "$1" == "-P" ]]; then
-    builtin cd -P "$1" || return
-  fi
-  if [[ "$1" == "-" ]]; then
-    builtin cd - || return
-    return
-  fi
-  dir="$(grealpath -m "${1:-$HOME}")"
-  GITHUB_COM_ROOT="$HOME/github.com"
-  if [[ "$dir" = $GITHUB_COM_ROOT/*/* ]]; then
-    # ~/github.com/user/repo → gh repo clone user/repo
-    local rel="${dir#$GITHUB_COM_ROOT/}"
-    local user_repo="${rel%%/*}"
-    rel="${rel#*/}"
-    user_repo="$user_repo/${rel%%/*}"
-    local repo_dir="$GITHUB_COM_ROOT/$user_repo"
-    [[ -d "$repo_dir" ]] || gh repo clone "$user_repo" "$repo_dir"
-  fi
-  if [[ "$dir" = $GITHUB_ROOT/* ]]; then
-    repo="${dir#$GITHUB_ROOT/}"
-    repo_dir="$GITHUB_ROOT/${repo%%/*}"
-    [[ -d "$repo_dir" ]] || git clone "https://github.com/github/$repo" "$repo_dir"
-  fi
-  if [[ "$dir" = $NPM_ROOT/* ]]; then
-    repo="${dir#$NPM_ROOT/}"
-    repo_dir="$NPM_ROOT/${repo%%/*}"
-    [[ -d "$repo_dir" ]] || git clone "https://github.com/npm/$repo" "$repo_dir"
-  fi
-  builtin cd "$dir"
+    GITHUB_ROOT="$HOME/github"
+    NPM_ROOT="$HOME/npm"
+    if [[ "$1" == "-P" ]]; then
+        builtin cd -P "$1" || return
+    fi
+    if [[ "$1" == "-" ]]; then
+        builtin cd - || return
+        return
+    fi
+    dir="$(grealpath -m "${1:-$HOME}")"
+    GITHUB_COM_ROOT="$HOME/github.com"
+    if [[ "$dir" = $GITHUB_COM_ROOT/*/* ]]; then
+        # ~/github.com/user/repo → gh repo clone user/repo
+        local rel="${dir#$GITHUB_COM_ROOT/}"
+        local user_repo="${rel%%/*}"
+        rel="${rel#*/}"
+        user_repo="$user_repo/${rel%%/*}"
+        local repo_dir="$GITHUB_COM_ROOT/$user_repo"
+        [[ -d "$repo_dir" ]] || gh repo clone "$user_repo" "$repo_dir"
+    fi
+    if [[ "$dir" = $GITHUB_ROOT/* ]]; then
+        repo="${dir#$GITHUB_ROOT/}"
+        repo_dir="$GITHUB_ROOT/${repo%%/*}"
+        [[ -d "$repo_dir" ]] || git clone "https://github.com/github/$repo" "$repo_dir"
+    fi
+    if [[ "$dir" = $NPM_ROOT/* ]]; then
+        repo="${dir#$NPM_ROOT/}"
+        repo_dir="$NPM_ROOT/${repo%%/*}"
+        [[ -d "$repo_dir" ]] || git clone "https://github.com/npm/$repo" "$repo_dir"
+    fi
+    builtin cd "$dir"
 }
 
 # cd to a directory and create it if it doesn't exist
 function mkcd() {
-  if [ -z "$1" ]; then
-    echo "Usage: mkcd <directory>"
-    return
-  fi
-  mkdir -p "$1" && cd "$1"
+    if [ -z "$1" ]; then
+        echo "Usage: mkcd <directory>"
+        return
+    fi
+    mkdir -p "$1" && cd "$1"
 }
 
 ## Use SvelteKit to bootstrap a new svelte project and kickstart it.
 function svelte-me() {
-  npm init svelte@next "$1"
-  cd "$1" || exit
-  npm install
-  git init
-  git add -A
-  git commit -m "Initial commit"
-  code .
-  npm run dev -- --open
+    npm init svelte@next "$1"
+    cd "$1" || exit
+    npm install
+    git init
+    git add -A
+    git commit -m "Initial commit"
+    code .
+    npm run dev -- --open
 }
 
 function colormap() {
-  for i in {0..255}; do
-    printf "\x1b[38;5;${i}mcolour${i}\n"
-  done
+    for i in {0..255}; do
+        printf "\x1b[38;5;${i}mcolour${i}\n"
+    done
 }
 
 function cscode() {
-  if [ -z "$1" ]; then
-    echo "Usage: cscode -r github_repo_name [-b branch_name]"
-    return
-  fi
-  csname="$(gh cs create $@)"
-  gh cs code -c $csname
+    if [ -z "$1" ]; then
+        echo "Usage: cscode -r github_repo_name [-b branch_name]"
+        return
+    fi
+    csname="$(gh cs create $@)"
+    gh cs code -c $csname
 }
 
 alias listening_on_my_mac="netstat -an -ptcp | grep LISTEN"
 
 function nibbles() {
-  if [ ! -f "${GOPATH}/bin/nibbles" ]; then
-    go install github.com/gophun/nibbles@latest
-  else
-    $GOPATH/bin/nibbles
-  fi
+    if [ ! -f "${GOPATH}/bin/nibbles" ]; then
+        go install github.com/gophun/nibbles@latest
+    else
+        $GOPATH/bin/nibbles
+    fi
 }
 
 # Useful for accessing keychain when working remotely
@@ -211,26 +211,26 @@ alias docker_tcp_listener="socat TCP-LISTEN:2376,reuseaddr,fork UNIX-CONNECT:/va
 
 # Fix terminfo on remote ssh server
 function ghostty-ssh-fix() {
-  infocmp -x ghostty | ssh "$1" -- tic -x -
+    infocmp -x ghostty | ssh "$1" -- tic -x -
 }
 
 # Ues the macOS keychain to store secrets
 function secret-set() {
-  if [[ $# -lt 2 ]]; then
-    echo "Usage: secret-set <KEY_NAME> <value>"
-    return 1
-  fi
-  security add-generic-password -U -a "$USER" -s "$1" -w "$2"
-  echo "Stored $1"
+    if [[ $# -lt 2 ]]; then
+        echo "Usage: secret-set <KEY_NAME> <value>"
+        return 1
+    fi
+    security add-generic-password -U -a "$USER" -s "$1" -w "$2"
+    echo "Stored $1"
 }
 
 # Use the macOS keychain to retrieve secrets
 function secret-get() {
-  if [[ $# -lt 1 ]]; then
-    echo "Usage: secret-get <KEY_NAME>"
-    return 1
-  fi
-  security find-generic-password -a "$USER" -s "$1" -w 2>/dev/null
+    if [[ $# -lt 1 ]]; then
+        echo "Usage: secret-get <KEY_NAME>"
+        return 1
+    fi
+    security find-generic-password -a "$USER" -s "$1" -w 2>/dev/null
 }
 
 alias skill='kill -9 $(ps aux | fzf | awk "{print \$2}")'

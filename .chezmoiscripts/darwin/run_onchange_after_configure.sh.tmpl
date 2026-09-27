@@ -27,6 +27,12 @@ defaults write com.apple.dock show-recents -bool true
 
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool false
 
+# Setup cmd-shift-a to archive in Mail
+defaults write com.apple.mail NSUserKeyEquivalents -dict-add Archive '@$a'
+if ! defaults read com.apple.universalaccess com.apple.custommenu.apps 2>/dev/null | grep -Fq '"com.apple.mail"'; then
+  defaults write com.apple.universalaccess com.apple.custommenu.apps -array-add com.apple.mail
+fi
+
 defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
 
 if [ "$(command -v dockutil)" ]; then
